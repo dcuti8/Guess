@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Guess Number</title>
+</head>
+<style type="text/css">
+	h1 {
+		color:green;
+		font-size: x-large;
+		font-family: cursive;
+		font-style: italic;
+	}
+
+	label{
+		color:red;
+		font-size: small;
+		font-family: Apple LiGothic Medium;
+		font-style: inherit;
+		border: 1;
+		border-width: 0.1;
+		border-color: red;
+		visibility: hidden;
+		border-style: dashed;
+	}
+
+	a {
+		color:blue;
+		font-size: larger;
+	}
+</style>
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+
+<body>
+<h1>Guess Number</h1>
+<hr/>
+<a href="#" onclick="window.location.reload();">Restart!</a>
+<br/>
+<br/>
+<input type="Number" id="txt1" placeholder="1-100">
+<button id="btn1">Guess</button>
+<label id="tips"></label>
+<br/>
+<br/>
+<textarea id="saveTip" style="background-color: lightyellow; width: 200px; height: 400px;border-style: dashed;border-width: thick; border-color: cornflowerblue;
+    color: chocolate; "></textarea>
+
+</body>
+</html>
+
+<script type="text/javascript">
+		var rng = Math.floor(Math.random()*99-1); 
+		//var rng = Math.floor(Math.random()*100 +1); 
+		console.log(rng);
+		var guessed = [];
+		var save =[];
+		var num = document.getElementById("txt1");
+		var tips = document.getElementById("tips");
+		var saveTip = document.getElementById("saveTip");
+		var saveTips;
+		save[0]="==========History==========";
+
+	$("#btn1").click(function(){
+		var bonb = rng;			
+		tips.style.visibility = "visible";
+
+		if(num.value == bonb){
+			tips.innerHTML = "!!!!!!!!!!!Bonb!!!!!!!!!!!"
+			saveTips = tips.innerHTML;
+			save.push(saveTips);
+		}
+
+		if (num.value >= 100 || num.value <=1){
+			tips.innerHTML = "The number must in range of 1 to 100."
+			saveTips = tips.innerHTML;
+			save.push(saveTips);
+		}
+		else {
+			//if(guessed.length != 0){
+				//for( var i = 0; i < guessed.length; i++){
+				//	if(num.value == guessed[i] ){
+				//		tips.innerHTML = "This number has guessed.";
+				//		guessed.pop();
+				//	}
+				//}	
+			//}
+
+			//else 
+
+			if(num.value < bonb){
+				tips.innerHTML = "Bonb is bigger than " + num.value;
+				saveTips = tips.innerHTML;
+				save.push(saveTips);
+			}
+			else if(num.value > bonb){
+				tips.innerHTML = "Bonb is smaller than " + num.value;
+				saveTips = tips.innerHTML;
+				save.push(saveTips);
+			}
+
+			
+			guessed.push(num.value);
+			console.log(guessed);
+			
+			
+		}
+
+		saveTip.value = " ";
+			for( var i = 0; i < save.length; i++){				
+				saveTip.value = saveTip.value + save[i] +"\n";
+			}
+		//tips.innerHTML = num.value;
+	});
+</script>
